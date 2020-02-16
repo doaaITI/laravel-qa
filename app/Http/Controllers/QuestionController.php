@@ -43,7 +43,10 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question=new Question;
+        $question->create(['title'=>$request->title,'user_id'=>Auth::user()->id ,'body'=>$request->body]);
+        return redirect()->route('questions.show', $question->id)->with('success', 'Your question has been created');
+        
     }
 
     /**
@@ -54,7 +57,8 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+      
+        return view('questions.show',compact('question'));
     }
 
     /**
